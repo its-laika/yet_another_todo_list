@@ -1,0 +1,22 @@
+meta {
+  name: Update
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:8081/todos/:todoId
+  body: json
+  auth: none
+}
+
+params:path {
+  todoId: 43f36528-6993-46ff-896f-f473dd46e209
+}
+
+body:json {
+  {
+    "text": "Be gay, do crime",
+    "done": true
+  }
+}

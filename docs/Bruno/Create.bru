@@ -1,0 +1,18 @@
+meta {
+  name: Create
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8081/todos
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "text": "Be gay, do crime",
+    "done": false
+  }
+}
