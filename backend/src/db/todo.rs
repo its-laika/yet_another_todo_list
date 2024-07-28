@@ -3,12 +3,16 @@
 use sea_orm::entity::prelude::*;
 use serde::{Deserialize, Serialize};
 
+/// Representation of a Todo that is stored in the database
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
 #[sea_orm(table_name = "todo")]
 pub struct Model {
+    /// Id (as a Uuid)
     #[sea_orm(primary_key, auto_increment = false)]
     pub id: Uuid,
+    /// Content of the Todo
     pub text: String,
+    /// Indicator whether the Todo has been completed
     pub done: bool,
 }
 

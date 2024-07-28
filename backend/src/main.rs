@@ -14,7 +14,15 @@ async fn main() {
         return;
     }
 
-    let connection = match db::establish_connection().await {
+    let connect_options = match db::get_connect_options() {
+        Ok(c) => c,
+        Err(e) => {
+            error!("Could not build connect options: {e}");
+            return;
+        }
+    };
+
+    let connection = match db::establish_connection(connect_options).await {
         Ok(c) => c,
         Err(e) => {
             error!("Could not establish connection to database: {e}");

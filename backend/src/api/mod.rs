@@ -1,3 +1,8 @@
+//! Module for all HTTP handling
+//!
+//! Contains functions to set up a HTTP server that
+//! provides the Todo API.
+
 mod routes;
 mod server;
 

@@ -7,7 +7,7 @@
   - [ ] By using
   - [ ] By module tets
 - [ ] Documentation
-  - [ ] Code documentation
+  - [x] Code documentation
   - [ ] API documentation
   - [ ] [README.md](README.md)
 - [ ] Categorize TODOs
