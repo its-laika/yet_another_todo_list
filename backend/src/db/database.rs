@@ -104,7 +104,7 @@ pub async fn create_todo(
     todo.insert(connection).await
 }
 
-/// Loads all Todos out of the database
+/// Loads *open* Todos out of the database
 ///
 /// # Arguments
 ///
@@ -114,8 +114,11 @@ pub async fn create_todo(
 /// # Examples
 ///
 /// * see [Todo loading route](../api/routes.rs#get_all)
-pub async fn load_todos(connection: &DatabaseConnection) -> DbResult<Vec<Todo>> {
-    todo::Entity::find().all(connection).await
+pub async fn load_open_todos(connection: &DatabaseConnection) -> DbResult<Vec<Todo>> {
+    todo::Entity::find()
+        .filter(todo::Column::Done.eq(false))
+        .all(connection)
+        .await
 }
 
 /// Loads a Todo out of the database by given `id`

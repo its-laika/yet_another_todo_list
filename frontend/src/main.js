@@ -1,9 +1,8 @@
 let todos = [];
 
 function loadTodos() {
-    fetch(`${getOrigin()}/todos`)
+    fetch(`${getOrigin()}/todos/open`)
         .then(response => response.json())
-        .then(t => todos = t.filter(e => !e.done))
         .then(_ => Handlebars.templates.table({ todos }))
         .then(html => document.getElementById('table-container').innerHTML = html);
 }

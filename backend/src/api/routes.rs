@@ -10,16 +10,16 @@ use axum::{
 use log::error;
 use uuid::Uuid;
 
-/// Axum endpoint handler to get all Todos (by GET-ting `/todos`)
+/// Axum endpoint handler to get *open* Todos (by GET-ting `/todos/open`)
 ///
 /// # Returns (HTTP)
 ///
-/// * 200, `Todo[]` - All Todos that are currently stored
+/// * 200, `Todo[]` - Todos that are currently stored & are not done
 /// * 500, `null`
-pub async fn get_all(State(api_state): State<ApiState>) -> (StatusCode, Json<Option<Vec<Todo>>>) {
+pub async fn get_open(State(api_state): State<ApiState>) -> (StatusCode, Json<Option<Vec<Todo>>>) {
     let connection = api_state.connection.lock().await;
 
-    let todos = match db::load_todos(&connection).await {
+    let todos = match db::load_open_todos(&connection).await {
         Ok(t) => t,
         Err(e) => {
             error!("Could not load from database: {e}");

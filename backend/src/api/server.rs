@@ -63,7 +63,7 @@ pub async fn init<A: ToSocketAddrs + Send>(
     shutdown_rx: oneshot::Receiver<()>,
 ) -> Result<(), Error> {
     let app = Router::new()
-        .route("/todos", get(routes::get_all))
+        .route("/todos/open", get(routes::get_open))
         .route("/todos", post(routes::create))
         .route("/todos/:id", put(routes::update))
         .route("/todos/:id", delete(routes::delete))
