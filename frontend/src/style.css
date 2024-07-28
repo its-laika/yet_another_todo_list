@@ -1,0 +1,11 @@
+nav {
+    margin-bottom: 3%;
+}
+
+th:first-child {
+    width: 20px;
+}
+
+th:last-child {
+    width: 20px;
+}

@@ -1,0 +1,38 @@
+{{#if todos}}
+<table class="table table-striped table-bordered table-responsive">
+    <thead>
+        <tr class="table-dark">
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each todos}}
+        <tr>
+            <td>
+                {{#if done}}
+                <input type="checkbox" onclick="updateTodo('{{id}}', false)" checked="1">
+                {{else}}
+                <input type="checkbox" onclick="updateTodo('{{id}}', true)">
+                {{/if}}
+            </td>
+            <td>
+                {{#if text}}
+                {{text}}
+                {{else}}
+                -
+                {{/if}}
+            </td>
+            <td>
+                <span onclick="deleteTodo('{{id}}')">🗑</button>
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<div class="alert alert-secondary" role="alert">
+    No Todos :)
+</div>
+{{/if}}
