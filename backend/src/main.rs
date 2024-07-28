@@ -1,4 +1,5 @@
 use log::{error, info};
+use migration::MigratorTrait;
 use std::sync::Arc;
 use tokio::sync::{oneshot, Mutex};
 
@@ -29,6 +30,13 @@ async fn main() {
             return;
         }
     };
+
+    if let Err(e) = migration::Migrator::up(&connection, None).await {
+        error!("Database migration failed: {e}");
+        return;
+    } else {
+        info!("Ran database migrations.");
+    }
 
     let api_state = api::ApiState {
         connection: Arc::new(Mutex::new(connection.clone())),
