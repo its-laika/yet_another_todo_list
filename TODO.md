@@ -1,8 +1,8 @@
 # TODOs
 
 - [x] Basic API functionality
-- [ ] Frontend
-  - [ ] Should work in sub directory
+- [x] Frontend
+  - [x] Should work in sub directory
 - [ ] Tests
   - [ ] By using
   - [ ] By module tets
@@ -12,3 +12,4 @@
   - [ ] [README.md](README.md)
 - [ ] Categorize TODOs
   - [ ] Different columns? (Kanban like?)
+- [ ] Graceful backend shutdown

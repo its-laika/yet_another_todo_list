@@ -1,4 +1,4 @@
-use log::{error, info};
+use log::{error, info, warn};
 use migration::MigratorTrait;
 use std::sync::Arc;
 use tokio::sync::{oneshot, Mutex};
@@ -11,8 +11,7 @@ async fn main() {
     env_logger::init();
 
     if let Err(e) = dotenvy::dotenv() {
-        error!("Could not load .env file: {e}");
-        return;
+        warn!("Could not load .env file: {e}");
     }
 
     let connect_options = match db::get_connect_options() {
