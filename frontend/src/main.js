@@ -3,6 +3,7 @@ let todos = [];
 function loadTodos() {
     fetch(`${getOrigin()}/todos/open`)
         .then(response => response.json())
+        .then(t => todos = t)
         .then(_ => Handlebars.templates.table({ todos }))
         .then(html => document.getElementById('table-container').innerHTML = html);
 }
