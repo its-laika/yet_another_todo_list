@@ -13,8 +13,20 @@ function addTodo(event) {
         event.preventDefault();
     }
 
+    const input = event.target[0]
+    if (!input) {
+        throw new Error('Could not find input element');
+    }
+
+    input.disabled = true;
+
+    const text = input.value;
+    if (!text) {
+        return;
+    }
+
     const body = {
-        text: event.target[0].value,
+        text,
         done: false,
     };
 
@@ -31,12 +43,21 @@ function addTodo(event) {
         .then(response => response.json())
         .then(t => todos.push(t))
         .then(_ => Handlebars.templates.table({ todos }))
-        .then(html => document.getElementById('table-container').innerHTML = html);
+        .then(html => document.getElementById('table-container').innerHTML = html)
+        .then(_ => {
+            input.disabled = false;
+            input.value = '';
+        });
 }
 
 function updateTodo(todoId, done) {
+    const text = todos.find(t => t.id === todoId).text;
+    if (!text) {
+        return;
+    }
+
     const body = {
-        text: todos.find(t => t.id === todoId).text,
+        text,
         done
     };
 
