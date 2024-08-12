@@ -9,3 +9,8 @@ th:first-child {
 th:last-child {
     width: 20px;
 }
+
+input[type="checkbox"],
+.delete-icon {
+    cursor: pointer;
+}
