@@ -77,7 +77,9 @@ function updateTodo(todoId, done) {
             }
         }))
         .then(_ => Handlebars.templates.table({ todos }))
-        .then(html => document.getElementById('table-container').innerHTML = html);
+        .then(html => document.getElementById('table-container').innerHTML = html)
+        .then(_ => new Promise(resolve => setTimeout(resolve, 3000)))
+        .then(_ => loadTodos());
 }
 
 function deleteTodo(todoId) {

@@ -1,16 +1,42 @@
-nav {
-    margin-bottom: 3%;
+h1 {
+    text-align: center;
 }
 
-th:first-child {
+.container {
+    margin-top: 3%;
+}
+
+.table-dark {
+    --bs-table-bg: #202020;
+}
+
+#table-container {
+    margin-top: 50px;
+}
+
+td:first-child {
     width: 20px;
 }
 
-th:last-child {
+td:last-child {
     width: 20px;
 }
 
 input[type="checkbox"],
 .delete-icon {
     cursor: pointer;
+}
+
+form {
+    background: var(--bs-body-bg);
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    padding-top: 20px;
+}
+
+button#submit {
+    background: linear-gradient(45deg, #d60270, #0038a8) border-box;
+    border-width: 0;
+    width: 100%;
 }

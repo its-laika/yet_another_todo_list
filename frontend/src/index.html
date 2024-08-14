@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
@@ -13,24 +13,17 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-            &nbsp;
-        </div>
-    </nav>
-
     <div class="container">
-        <h3>Current Todos</h3>
+        <h1>Todos</h1>
 
         <div id="table-container" class="overflow-auto"></div>
 
         <form>
             <div class="mb-3">
-                <label for="new-todo" class="form-label">New Todo</label>
-                <input class="form-control" type="text" name="new-todo" id="new-todo" placeholder="Be gay, do crime!">
+                <input class="form-control" type="text" name="new-todo" id="new-todo" placeholder="Add todo...">
             </div>
             <div class="mb-3 button-container">
-                <button type="submit" class="btn btn-primary" aria-describedby="submit-hint">Submit</button>
+                <button type="submit" class="btn btn-primary" aria-describedby="submit-hint" id="submit">Submit</button>
             </div>
         </form>
     </div>

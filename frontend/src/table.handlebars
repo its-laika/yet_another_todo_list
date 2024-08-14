@@ -1,12 +1,5 @@
 {{#if todos}}
 <table class="table table-striped table-bordered table-responsive">
-    <thead>
-        <tr class="table-dark">
-            <th scope="col"></th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
     <tbody>
         {{#each todos}}
         <tr>
@@ -25,7 +18,7 @@
                 {{/if}}
             </td>
             <td>
-                <span onclick="deleteTodo('{{id}}')" class="delete-icon">🗑</button>
+                <span onclick="deleteTodo('{{id}}')" class="delete-icon">❌</button>
             </td>
         </tr>
         {{/each}}
@@ -33,6 +26,6 @@
 </table>
 {{else}}
 <div class="alert alert-secondary" role="alert">
-    No Todos :)
+    No todos :)
 </div>
 {{/if}}
