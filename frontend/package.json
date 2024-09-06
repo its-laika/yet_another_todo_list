@@ -13,7 +13,7 @@
     "todo",
     "todo-list"
   ],
-  "author": "Niklas 'Curly' Schmidt",
+  "author": "Niklas Schmidt",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^5.3.3",

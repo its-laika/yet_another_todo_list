@@ -49,7 +49,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/neon-JS/yet_another_todo_list-frontend
+          images: ${{ env.REGISTRY }}/its-laika/yet_another_todo_list-frontend
 
       - name: Build and push Docker image
         id: build-and-push
