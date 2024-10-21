@@ -1,3 +1,22 @@
+Handlebars.registerHelper('tryLink', function (value) {
+    if (!value) {
+        return value;
+    }
+
+    if (typeof value !== 'string') {
+        return value;
+    }
+
+    try {
+        if ((new URL(value)).protocol !== 'https:') {
+            return value;
+        }
+        return new Handlebars.SafeString(`<a href="${value}" target="_blank">${value}</a>`);
+    } catch (_) {
+        return value;
+    }
+});
+
 let todos = [];
 
 function loadTodos() {
