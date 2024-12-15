@@ -13,7 +13,7 @@
     "todo",
     "todo-list"
   ],
-  "author": "Niklas Schmidt",
+  "author": "Laika Schmidt",
   "license": "MIT",
   "dependencies": {
     "bootstrap": "^5.3.3",
