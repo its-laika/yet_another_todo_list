@@ -65,8 +65,8 @@ pub async fn init<A: ToSocketAddrs + Send>(
     let app = Router::new()
         .route("/todos/open", get(routes::get_open))
         .route("/todos", post(routes::create))
-        .route("/todos/:id", put(routes::update))
-        .route("/todos/:id", delete(routes::delete))
+        .route("/todos/{id}", put(routes::update))
+        .route("/todos/{id}", delete(routes::delete))
         .with_state(api_state);
 
     let listener = TcpListener::bind(address).await?;
