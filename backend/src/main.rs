@@ -1,11 +1,7 @@
 use log::{error, info, warn};
 use migration::MigratorTrait;
 use std::sync::Arc;
-use tokio::{
-    signal::ctrl_c,
-    sync::{oneshot, Mutex},
-    task::JoinSet,
-};
+use tokio::sync::Mutex;
 
 mod api;
 mod db;
@@ -55,32 +51,13 @@ async fn main() {
         }
     };
 
-    let (shutdown_rx, shutdown_tx) = oneshot::channel();
-
     info!("Listening on {} ...", &bind_address);
 
-    let mut join_set = JoinSet::new();
+    if let Err(error) = api::init(&bind_address, api_state).await {
+        error!("Server shut down with: {error}");
+    };
 
-    join_set.spawn(async move {
-        match api::init(&bind_address, api_state, shutdown_tx).await {
-            Ok(()) => {
-                info!("Connection closed, server shut down.");
-            }
-            Err(e) => {
-                error!("Server shut down with: {e}");
-            }
-        }
-    });
-
-    join_set.spawn(async move {
-        ctrl_c().await.unwrap();
-
-        info!("Received shutdown signal.");
-
-        shutdown_rx.send(()).unwrap();
-    });
-
-    while join_set.join_next().await.is_some() {}
+    info!("Connection closed, server shut down.");
 
     if let Err(e) = connection.close().await {
         error!("Could not gracefully close database connection: {e}");

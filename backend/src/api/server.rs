@@ -3,7 +3,7 @@ use axum::{
     routing::{delete, get, post, put},
     Router,
 };
-use log::info;
+use log::{error, info};
 use sea_orm::DatabaseConnection;
 use std::{
     env::{self, VarError},
@@ -12,7 +12,8 @@ use std::{
 };
 use tokio::{
     net::{TcpListener, ToSocketAddrs},
-    sync::{oneshot, Mutex},
+    signal::ctrl_c,
+    sync::Mutex,
 };
 
 /// Global state for all API handlers.
@@ -38,8 +39,6 @@ pub struct ApiState {
 /// * `address` - The (socket) address to bind the HTTP server on
 /// * `api_state` - The state object that will be passed into the handlers.
 ///   Contains a database connection.
-/// * `shutdown_rx` - Oneshot receiver that initiates a graceful shutdown
-///   of the HTTP server.
 ///
 /// # Examples
 ///
@@ -57,11 +56,7 @@ pub struct ApiState {
 ///     println!("API shut down with error!");
 /// }
 /// ```
-pub async fn init<A: ToSocketAddrs + Send>(
-    address: A,
-    api_state: ApiState,
-    shutdown_rx: oneshot::Receiver<()>,
-) -> Result<(), Error> {
+pub async fn init<A: ToSocketAddrs + Send>(address: A, api_state: ApiState) -> Result<(), Error> {
     let app = Router::new()
         .route("/todos/open", get(routes::get_open))
         .route("/todos", post(routes::create))
@@ -73,7 +68,9 @@ pub async fn init<A: ToSocketAddrs + Send>(
 
     axum::serve(listener, app)
         .with_graceful_shutdown(async {
-            shutdown_rx.await.ok();
+            if let Err(error) = ctrl_c().await {
+                error!("Could not listen for shutdown signal: {error}");
+            };
 
             info!("API received shutdown signal...");
         })
